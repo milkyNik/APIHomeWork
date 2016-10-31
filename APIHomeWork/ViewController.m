@@ -10,12 +10,15 @@
 #import "ServerManager.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "DetailTableViewController.h"
 
-static NSInteger friendsInRequest = 20;
+
+static NSInteger friendsInRequest = 5;
 
 @interface ViewController ()
 
 @property (strong, nonatomic) NSMutableArray* friendsArray;
+@property (strong, nonatomic) User* selectedUser;
 
 @end
 
@@ -90,8 +93,8 @@ static NSInteger friendsInRequest = 20;
         User* user = self.friendsArray[indexPath.row];
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
-        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:user.imageUrl]];
-        //[cell.imageView setImageWithURL:user.imageUrl];
+        //cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:user.imageUrl]];
+        [cell.imageView setImageWithURL:user.imageUrl];
         
     }
     
@@ -106,7 +109,26 @@ static NSInteger friendsInRequest = 20;
     
     if (indexPath.row == [self.friendsArray count]) {
         [self getFriendsFromServer];
+    } else {
+
+        self.selectedUser = self.friendsArray[indexPath.row];
+        
+        DetailTableViewController* detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+
+        detailController.delegate = self;
+        
+        [self.navigationController pushViewController:detailController animated:YES];
+        
+
     }
+    
+}
+
+#pragma mark - DetailDelegate
+
+- (NSString*) getUserId {
+    
+    return self.selectedUser.userId;
     
 }
 

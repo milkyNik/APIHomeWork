@@ -9,6 +9,7 @@
 #import "ServerManager.h"
 #import "AFNetworking.h"
 #import "User.h"
+#import "DetailUser.h"
 
 @interface ServerManager ()
 
@@ -85,7 +86,44 @@
         }
         
     }];
+  
+}
 
+- (void) getUserInfoByUserID:(NSString*) userId
+                  withFields:(NSArray*) fieldsArray
+                   onSuccess:(void(^)(id user)) success
+                   onFailure:(void(^)(NSError* error)) failure {
+    
+    NSDictionary* params = @{
+                             @"user_id"     : userId,
+                             @"name_case"   : @"nom",
+                             @"fields"      : fieldsArray};
+    
+    [self.requestSessionManager GET:@"users.get" parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
+        
+        DetailUser* detailUser = [[DetailUser alloc] initWithServerResponse:[dictionarysArray firstObject]];
+        
+        
+        
+        if (success) {
+            
+            success(detailUser);
+        }
+        
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        
+        NSLog(@"Error: %@", error);
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+    
     
 }
 

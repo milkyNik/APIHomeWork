@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UITableViewController
+@protocol DetailDelegate;
+
+@interface ViewController : UITableViewController <DetailDelegate>
 
 
 @end

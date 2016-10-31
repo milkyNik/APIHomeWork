@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		64A4C116CA7B9FCA2C267A4F /* libPods-APIHomeWork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC831CBE53E7F6DAF342F919 /* libPods-APIHomeWork.a */; };
+		88143AC01DC776A80000892E /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88143ABF1DC776A80000892E /* DetailTableViewController.m */; };
+		88143AC51DC791310000892E /* DetailUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 88143AC41DC791310000892E /* DetailUser.m */; };
 		881A44771DC5DA2D004AFE97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 881A44761DC5DA2D004AFE97 /* main.m */; };
 		881A447A1DC5DA2D004AFE97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 881A44791DC5DA2D004AFE97 /* AppDelegate.m */; };
 		881A447D1DC5DA2D004AFE97 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881A447C1DC5DA2D004AFE97 /* ViewController.m */; };
@@ -20,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		88143ABE1DC776A80000892E /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		88143ABF1DC776A80000892E /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		88143AC31DC791310000892E /* DetailUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailUser.h; sourceTree = "<group>"; };
+		88143AC41DC791310000892E /* DetailUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailUser.m; sourceTree = "<group>"; };
 		881A44721DC5DA2D004AFE97 /* APIHomeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APIHomeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		881A44761DC5DA2D004AFE97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		881A44781DC5DA2D004AFE97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,6 +58,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88143AC11DC776B30000892E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				881A447B1DC5DA2D004AFE97 /* ViewController.h */,
+				881A447C1DC5DA2D004AFE97 /* ViewController.m */,
+				88143ABE1DC776A80000892E /* DetailTableViewController.h */,
+				88143ABF1DC776A80000892E /* DetailTableViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		88143AC21DC776C20000892E /* Server Manager */ = {
+			isa = PBXGroup;
+			children = (
+				881A448E1DC5E07D004AFE97 /* ServerManager.h */,
+				881A448F1DC5E07D004AFE97 /* ServerManager.m */,
+			);
+			name = "Server Manager";
+			sourceTree = "<group>";
+		};
 		881A44691DC5DA2C004AFE97 = {
 			isa = PBXGroup;
 			children = (
@@ -77,10 +103,8 @@
 				881A44941DC5E37A004AFE97 /* Models */,
 				881A44781DC5DA2D004AFE97 /* AppDelegate.h */,
 				881A44791DC5DA2D004AFE97 /* AppDelegate.m */,
-				881A447B1DC5DA2D004AFE97 /* ViewController.h */,
-				881A447C1DC5DA2D004AFE97 /* ViewController.m */,
-				881A448E1DC5E07D004AFE97 /* ServerManager.h */,
-				881A448F1DC5E07D004AFE97 /* ServerManager.m */,
+				88143AC11DC776B30000892E /* ViewControllers */,
+				88143AC21DC776C20000892E /* Server Manager */,
 				881A447E1DC5DA2D004AFE97 /* Main.storyboard */,
 				881A44811DC5DA2D004AFE97 /* Assets.xcassets */,
 				881A44831DC5DA2D004AFE97 /* LaunchScreen.storyboard */,
@@ -103,6 +127,8 @@
 			children = (
 				881A44911DC5E34F004AFE97 /* User.h */,
 				881A44921DC5E34F004AFE97 /* User.m */,
+				88143AC31DC791310000892E /* DetailUser.h */,
+				88143AC41DC791310000892E /* DetailUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -246,7 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				881A44901DC5E07D004AFE97 /* ServerManager.m in Sources */,
+				88143AC51DC791310000892E /* DetailUser.m in Sources */,
 				881A447D1DC5DA2D004AFE97 /* ViewController.m in Sources */,
+				88143AC01DC776A80000892E /* DetailTableViewController.m in Sources */,
 				881A44931DC5E34F004AFE97 /* User.m in Sources */,
 				881A447A1DC5DA2D004AFE97 /* AppDelegate.m in Sources */,
 				881A448D1DC5DB7B004AFE97 /* README.md in Sources */,
