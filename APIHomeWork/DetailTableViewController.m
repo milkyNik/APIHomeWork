@@ -77,16 +77,37 @@
     
 }
 
-#pragma mark - Table view data source
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+#pragma mark - Actions
+
+
+- (IBAction)actionGetSubscriptions:(UIButton *)sender {
+    
+    NSLog(@"actionGetSubscriptions!");
+    
+    [[ServerManager sharedManager] getSubscriptionsByUserID:self.userId
+                                                 withFields:@[@"photo_50"]
+                                                  onSuccess:^(NSArray *users) {
+                                                      
+                                                  } onFailure:^(NSError *error) {
+                                                      
+                                                  }];
+   
+    
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+- (IBAction)actionGetFollowers:(UIButton *)sender {
+    
+    NSLog(@"actionGetFollowers!");
+    
+    [[ServerManager sharedManager] getFollowersByUserID:self.userId
+                                             withFields:@[@"photo_50"]
+                                                 offset:0
+                                                  count:20
+                                              onSuccess:^(NSArray *users) {
+                                                  
+                                              } onFailure:^(NSError *error) {
+                                                  
+                                              }];
+    
 }
-*/
-
-
 @end

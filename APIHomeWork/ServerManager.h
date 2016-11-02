@@ -18,8 +18,21 @@
                     onFailure:(void(^)(NSError* error)) failure;
 
 - (void) getUserInfoByUserID:(NSString*) userId
-                        withFields:(NSArray*) fieldsArray
-                    onSuccess:(void(^)(id user)) success
+                  withFields:(NSArray*) fieldsArray
+                   onSuccess:(void(^)(id user)) success
+                   onFailure:(void(^)(NSError* error)) failure;
+
+- (void) getFollowersByUserID:(NSString*) userId
+                   withFields:(NSArray*) fieldsArray
+                       offset:(NSInteger) offset
+                        count:(NSInteger) count
+                    onSuccess:(void(^)(NSArray* users)) success
                     onFailure:(void(^)(NSError* error)) failure;
+
+
+- (void) getSubscriptionsByUserID:(NSString*) userId
+                       withFields:(NSArray*) fieldsArray
+                        onSuccess:(void(^)(NSArray* users)) success
+                        onFailure:(void(^)(NSError* error)) failure;
 
 @end

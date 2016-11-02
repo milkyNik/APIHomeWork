@@ -13,10 +13,13 @@
 @interface DetailTableViewController : UITableViewController
 
 @property (strong, nonatomic) id <DetailDelegate> delegate;
-
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
-
 @property (weak, nonatomic) IBOutlet UILabel *userName;
+
+
+- (IBAction)actionGetSubscriptions:(UIButton *)sender;
+- (IBAction)actionGetFollowers:(UIButton *)sender;
+
 
 @end
 

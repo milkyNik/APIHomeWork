@@ -90,7 +90,7 @@
 }
 
 - (void) getUserInfoByUserID:(NSString*) userId
-                  withFields:(NSArray*) fieldsArray
+                  withFields:(NSArray*) fieldsArray 
                    onSuccess:(void(^)(id user)) success
                    onFailure:(void(^)(NSError* error)) failure {
     
@@ -124,7 +124,105 @@
         
     }];
     
+}
+
+- (void) getFollowersByUserID:(NSString*) userId
+                   withFields:(NSArray*) fieldsArray
+                       offset:(NSInteger) offset
+                        count:(NSInteger) count
+                    onSuccess:(void(^)(NSArray* users)) success
+                    onFailure:(void(^)(NSError* error)) failure {
+    
+    NSDictionary* params = @{
+                             @"user_id"     : userId,
+                             @"name_case"   : @"nom",
+                             @"fields"      : fieldsArray,
+                             @"count"       : @(count),
+                             @"offset"      : @(offset)};
+    
+    [self.requestSessionManager GET:@"users.getFollowers" parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
+        
+        
+        
+        if (success) {
+            
+            success(dictionarysArray);
+        }
+        
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        
+        NSLog(@"Error: %@", error);
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+    
+    
+    
+    
+    
+}
+
+
+- (void) getSubscriptionsByUserID:(NSString*) userId
+                       withFields:(NSArray*) fieldsArray
+                        onSuccess:(void(^)(NSArray* users)) success
+                        onFailure:(void(^)(NSError* error)) failure {
+    
+    NSDictionary* params = @{
+                             @"user_id"     : userId,
+                             @"fields"      : fieldsArray};
+    
+    [self.requestSessionManager GET:@"users.getSubscriptions" parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
+        
+        
+        if (success) {
+            
+            success(dictionarysArray);
+        }
+        
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        
+        NSLog(@"Error: %@", error);
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+    
     
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
