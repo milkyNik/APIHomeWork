@@ -7,20 +7,38 @@
 //
 
 #import "UsersViewController.h"
+#import "User.h"
+#import "DetailUser.h"
+#import "UIImageView+AFNetworking.h"
+#import "ServerManager.h"
 
 @interface UsersViewController ()
 
-@property (strong, nonatomic) NSArray* userList;
-
+@property (strong, nonatomic) NSString* selectedUserId;
+@property (strong, nonatomic) NSMutableArray* usersArray;
 @end
 
 @implementation UsersViewController
 
+- (instancetype)initWithUsersId:(NSArray*) usersIdArray
+{
+    self = [super init];
+    if (self) {
+        
+        self.usersIdArray = [NSMutableArray arrayWithArray:usersIdArray];
+
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.usersArray = [NSMutableArray array];
     
-    self.userList = [self.delegate getUsersId];
+    [self getUsersFromServer];
+ 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,14 +48,58 @@
 
 
 
-/*
-#pragma mark - Navigation
+#pragma mark - API
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) getUsersFromServer {
+    
+    
+    for (NSString* userId in self.usersIdArray) {
+        
+        [[ServerManager sharedManager] getUserInfoByUserID:userId
+                       withFields:@[@"photo_50"] onSuccess:^(id user) {
+                           
+                           [self.usersArray addObject:user];
+                           [self.tableView reloadData];
+                           
+                       } onFailure:^(NSError *error) {
+                           NSLog(@"Error = %@", [error localizedDescription]);
+                       }];
+        
+    }
+    
 }
-*/
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [self.usersArray count];
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString* identifier = @"Cell";
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (!cell) {
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        
+    }
+    
+    
+        User* user = self.usersArray[indexPath.row];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+        //cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:user.imageUrl]];
+        [cell.imageView setImageWithURL:user.imageUrl];
+ 
+    return cell;
+}
+
+
+
 
 @end

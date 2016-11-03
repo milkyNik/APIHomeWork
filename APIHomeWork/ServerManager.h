@@ -12,10 +12,13 @@
 
 + (id) sharedManager;
 
-- (void) getFriendsWithOffset:(NSInteger) offset
-                        count:(NSInteger) count
-                    onSuccess:(void(^)(NSArray* friends)) success
-                    onFailure:(void(^)(NSError* error)) failure;
+
+
+- (void) getFriendsByUserID:(NSString*) userId
+                 WithOffset:(NSInteger) offset
+                      count:(NSInteger) count
+                  onSuccess:(void(^)(NSArray* friends)) success
+                  onFailure:(void(^)(NSError* error)) failure;
 
 - (void) getUserInfoByUserID:(NSString*) userId
                   withFields:(NSArray*) fieldsArray

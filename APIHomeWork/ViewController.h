@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol DetailDelegate;
+#import "DetailTableViewController.h"
 
 @interface ViewController : UITableViewController <DetailDelegate>
 
+@property (strong, nonatomic) NSMutableArray* friendsArray;
 
 @end
 

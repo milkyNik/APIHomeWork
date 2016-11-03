@@ -42,6 +42,7 @@
 		881A448F1DC5E07D004AFE97 /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
 		881A44911DC5E34F004AFE97 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		881A44921DC5E34F004AFE97 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		88201AC01DCBCCD400091634 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		8897E6011DC7D2C3000548B1 /* UsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
 		8897E6021DC7D2C3000548B1 /* UsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		CFB7B4121B2B690ADF13D233 /* Pods-APIHomeWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APIHomeWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-APIHomeWork/Pods-APIHomeWork.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,6 +296,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				881A447F1DC5DA2D004AFE97 /* Base */,
+				88201AC01DCBCCD400091634 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

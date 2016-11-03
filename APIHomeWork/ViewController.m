@@ -10,15 +10,16 @@
 #import "ServerManager.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
-#import "DetailTableViewController.h"
 
 
 static NSInteger friendsInRequest = 5;
 
 @interface ViewController ()
 
-@property (strong, nonatomic) NSMutableArray* friendsArray;
+
 @property (strong, nonatomic) User* selectedUser;
+
+@property (strong, nonatomic) NSString* userId;
 
 @end
 
@@ -26,40 +27,43 @@ static NSInteger friendsInRequest = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.userId = @"10588945";
     
     self.friendsArray = [NSMutableArray array];
     [self getFriendsFromServer];
     
 }
 
+
+
+
 #pragma mark - API
 
+
 - (void) getFriendsFromServer {
-    
-    [[ServerManager sharedManager] getFriendsWithOffset:[self.friendsArray count]
-                                                  count:friendsInRequest
-                                              onSuccess:^(NSArray *friends) {
-                                                  
-                                                  [self.friendsArray addObjectsFromArray:friends];
-                                                  
-                                                  NSMutableArray* newPaths = [NSMutableArray array];
-                                                  
-                                                  for (int i = (int)[self.friendsArray count] - (int)[friends count]; i < [self.friendsArray count]; i++) {
-                                                      [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                                  }
-                                                  
-                                                  [self.tableView beginUpdates];
-                                                  
-                                                  [self.tableView insertRowsAtIndexPaths:newPaths
-                                                                        withRowAnimation:UITableViewRowAnimationTop];
-                                                  
-                                                  [self.tableView endUpdates];
-                                                  
-                                              }
-                                              onFailure:^(NSError *error) {
-                                                  NSLog(@"Error = %@", [error localizedDescription]);
-                                              }];
+        
+    [[ServerManager sharedManager] getFriendsByUserID:self.userId
+                                           WithOffset:[self.friendsArray count]
+                                                count:friendsInRequest
+                                            onSuccess:^(NSArray *friends) {
+                                                [self.friendsArray addObjectsFromArray:friends];
+                                                
+                                                NSMutableArray* newPaths = [NSMutableArray array];
+                                                
+                                                for (int i = (int)[self.friendsArray count] - (int)[friends count]; i < [self.friendsArray count]; i++) {
+                                                    [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                                }
+                                                
+                                                [self.tableView beginUpdates];
+                                                
+                                                [self.tableView insertRowsAtIndexPaths:newPaths
+                                                                      withRowAnimation:UITableViewRowAnimationTop];
+                                                
+                                                [self.tableView endUpdates];
+                                            } onFailure:^(NSError *error) {
+                                                NSLog(@"Error = %@", [error localizedDescription]);
+                                            }];
     
     
 }

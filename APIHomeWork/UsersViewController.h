@@ -8,16 +8,11 @@
 
 #import "ViewController.h"
 
-@protocol UsersViewDelegate;
+@interface UsersViewController : UITableViewController
 
-@interface UsersViewController : ViewController
+@property (strong, nonatomic) NSArray* usersIdArray;
 
-@property (strong, nonatomic) id <UsersViewDelegate> delegate;
-
-@end
-
-@protocol UsersViewDelegate <NSObject>
-
-- (NSArray*) getUsersId;
+- (instancetype)initWithUsersId:(NSArray*) usersIdArray;
 
 @end
+

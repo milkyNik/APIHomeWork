@@ -44,13 +44,15 @@
     return self;
 }
 
-- (void) getFriendsWithOffset:(NSInteger) offset
-                        count:(NSInteger) count
-                    onSuccess:(void(^)(NSArray* friends)) success
-                    onFailure:(void(^)(NSError* error)) failure {
+
+- (void) getFriendsByUserID:(NSString*) userId
+                 WithOffset:(NSInteger) offset
+                      count:(NSInteger) count
+                  onSuccess:(void(^)(NSArray* friends)) success
+                  onFailure:(void(^)(NSError* error)) failure {
     
     NSDictionary* params = @{
-                             @"user_id"     : @"10588945",
+                             @"user_id"     : userId,
                              @"order"       : @"name",
                              @"fields"      : @"photo_50",
                              @"count"       : @(count),
@@ -86,7 +88,8 @@
         }
         
     }];
-  
+    
+    
 }
 
 - (void) getUserInfoByUserID:(NSString*) userId
@@ -144,13 +147,13 @@
         
         NSLog(@"JSON: %@", responseObject);
         
-        NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
+        //NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
         
-        
+        NSArray* usersIdArray = [responseObject valueForKeyPath:@"response.items.uid"];
         
         if (success) {
             
-            success(dictionarysArray);
+            success(usersIdArray);
         }
         
     } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -183,12 +186,14 @@
         
         NSLog(@"JSON: %@", responseObject);
         
-        NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
+        //NSArray* dictionarysArray = [responseObject objectForKey:@"response.users.items"];
+        
+        NSArray* usersIdArray = [responseObject valueForKeyPath:@"response.users.items"];
         
         
         if (success) {
             
-            success(dictionarysArray);
+            success(usersIdArray);
         }
         
     } failure:^(NSURLSessionTask *operation, NSError *error) {

@@ -1,0 +1,15 @@
+
+/* Class = "UITableViewController"; title = "Users"; ObjectID = "5xJ-NM-cgA"; */
+"5xJ-NM-cgA.title" = "Users";
+
+/* Class = "UINavigationItem"; title = "My Friends"; ObjectID = "SS5-k4-CX0"; */
+"SS5-k4-CX0.title" = "My Friends";
+
+/* Class = "UIButton"; normalTitle = "Followers"; ObjectID = "bDG-Bf-hqE"; */
+"bDG-Bf-hqE.normalTitle" = "Followers";
+
+/* Class = "UITableViewController"; title = "DitailViewController"; ObjectID = "jvj-aj-u8B"; */
+"jvj-aj-u8B.title" = "DitailViewController";
+
+/* Class = "UIButton"; normalTitle = "Subscriptions"; ObjectID = "tT5-Px-Jpx"; */
+"tT5-Px-Jpx.normalTitle" = "Subscriptions";

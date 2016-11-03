@@ -10,11 +10,13 @@
 #import "UIImageView+AFNetworking.h"
 #import "ServerManager.h"
 #import "DetailUser.h"
+#import "UsersViewController.h"
 
 @interface DetailTableViewController ()
 
 @property (strong, nonatomic) NSString* userId;
 @property (strong, nonatomic) DetailUser* detailUser;
+@property (strong, nonatomic) NSArray* usersArray;
 
 @end
 
@@ -23,13 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.userId = [self.delegate getUserId];
-    
-    //NSLog(@"user_id = %@", self.userId);
-    
-    //self.navigationItem.title = @"Test";
-    
-    //self.userName.text = @"Test text";
     
     [self getUserInfoFromServer];
     
@@ -68,12 +66,11 @@
     
     [self.userImage setImageWithURL:detailUser.largeImageUrl];
     
-    self.userName.text = [NSString stringWithFormat:@"%@ %@", detailUser.firstName, detailUser.lastName];
+    NSString* fullName = [NSString stringWithFormat:@"%@ %@", detailUser.firstName, detailUser.lastName];
     
+    self.userName.text = fullName;
+    self.navigationItem.title = fullName;
     [self.tableView reloadData];
-    
-    //self.navigationItem.title = detailUser.userId;
-    
     
 }
 
@@ -88,9 +85,21 @@
                                                  withFields:@[@"photo_50"]
                                                   onSuccess:^(NSArray *users) {
                                                       
+                                                      self.usersArray = users;
+                                                      
+                                                      UsersViewController* uc = [[UsersViewController alloc] initWithUsersId:users];
+                                                      
+                                                      uc.navigationItem.title = @"Subscriptions";
+                                                      
+                                                      [self.navigationController pushViewController:uc animated:YES];
+                                                      
+                                                      
                                                   } onFailure:^(NSError *error) {
                                                       
                                                   }];
+    
+    
+    
    
     
 }
@@ -104,6 +113,13 @@
                                                  offset:0
                                                   count:20
                                               onSuccess:^(NSArray *users) {
+                                                  
+                                                  self.usersArray = users;
+                                                  
+                                                  UsersViewController* uc = [[UsersViewController alloc] initWithUsersId:users];
+                                                  uc.navigationItem.title = @"Followers";
+                                                  
+                                                  [self.navigationController pushViewController:uc animated:YES];
                                                   
                                               } onFailure:^(NSError *error) {
                                                   
