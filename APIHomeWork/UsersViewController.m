@@ -20,12 +20,12 @@
 
 @implementation UsersViewController
 
-- (instancetype)initWithUsersId:(NSArray*) usersIdArray
+- (instancetype)initWithUsers:(NSArray*) usersArray
 {
     self = [super init];
     if (self) {
         
-        self.usersIdArray = [NSMutableArray arrayWithArray:usersIdArray];
+        self.usersArray = [NSMutableArray arrayWithArray:usersArray];
 
     }
     return self;
@@ -35,9 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.usersArray = [NSMutableArray array];
-    
-    [self getUsersFromServer];
+
  
 }
 
@@ -47,27 +45,6 @@
 }
 
 
-
-#pragma mark - API
-
-- (void) getUsersFromServer {
-    
-    
-    for (NSString* userId in self.usersIdArray) {
-        
-        [[ServerManager sharedManager] getUserInfoByUserID:userId
-                       withFields:@[@"photo_50"] onSuccess:^(id user) {
-                           
-                           [self.usersArray addObject:user];
-                           [self.tableView reloadData];
-                           
-                       } onFailure:^(NSError *error) {
-                           NSLog(@"Error = %@", [error localizedDescription]);
-                       }];
-        
-    }
-    
-}
 
 #pragma mark - UITableViewDataSource
 

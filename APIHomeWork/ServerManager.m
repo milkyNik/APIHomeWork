@@ -92,13 +92,13 @@
     
 }
 
-- (void) getUserInfoByUserID:(NSString*) userId
+- (void) getUserInfoByUserID:(NSArray*) usersId
                   withFields:(NSArray*) fieldsArray 
-                   onSuccess:(void(^)(id user)) success
+                   onSuccess:(void(^)(NSArray* users)) success
                    onFailure:(void(^)(NSError* error)) failure {
     
     NSDictionary* params = @{
-                             @"user_id"     : userId,
+                             @"user_ids"    : usersId,
                              @"name_case"   : @"nom",
                              @"fields"      : fieldsArray};
     
@@ -108,13 +108,17 @@
         
         NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
         
-        DetailUser* detailUser = [[DetailUser alloc] initWithServerResponse:[dictionarysArray firstObject]];
+        NSMutableArray* users = [NSMutableArray array];
         
-        
+        for (NSDictionary* response in dictionarysArray) {
+            
+            [users addObject:[[DetailUser alloc] initWithServerResponse:response]];
+            
+        }
         
         if (success) {
             
-            success(detailUser);
+            success(users);
         }
         
     } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -147,15 +151,23 @@
         
         NSLog(@"JSON: %@", responseObject);
         
-        //NSArray* dictionarysArray = [responseObject objectForKey:@"response"];
         
         NSArray* usersIdArray = [responseObject valueForKeyPath:@"response.items.uid"];
         
-        if (success) {
-            
-            success(usersIdArray);
-        }
         
+            [[ServerManager sharedManager] getUserInfoByUserID:usersIdArray
+                                                    withFields:@[@"photo_50"] onSuccess:^(NSArray* users) {
+
+                                                        if (success) {
+                                                            
+                                                            success(users);
+                                                        }
+                                                        
+                                                    } onFailure:^(NSError *error) {
+                                                        NSLog(@"Error = %@", [error localizedDescription]);
+                                                    }];
+            
+
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         
         NSLog(@"Error: %@", error);
@@ -165,11 +177,7 @@
         }
         
     }];
-    
-    
-    
-    
-    
+
 }
 
 
@@ -190,11 +198,18 @@
         
         NSArray* usersIdArray = [responseObject valueForKeyPath:@"response.users.items"];
         
-        
-        if (success) {
-            
-            success(usersIdArray);
-        }
+        [[ServerManager sharedManager] getUserInfoByUserID:usersIdArray
+                                                withFields:@[@"photo_50"] onSuccess:^(NSArray* users) {
+                                                    
+                                                    if (success) {
+                                                        
+                                                        success(users);
+                                                    }
+                                                    
+                                                } onFailure:^(NSError *error) {
+                                                    NSLog(@"Error = %@", [error localizedDescription]);
+                                                }];
+
         
     } failure:^(NSURLSessionTask *operation, NSError *error) {
         

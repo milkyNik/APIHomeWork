@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSArray* usersIdArray;
 
-- (instancetype)initWithUsersId:(NSArray*) usersIdArray;
+- (instancetype)initWithUsers:(NSArray*) usersArray;
 
 @end
 

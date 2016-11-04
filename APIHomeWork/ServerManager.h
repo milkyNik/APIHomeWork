@@ -20,9 +20,9 @@
                   onSuccess:(void(^)(NSArray* friends)) success
                   onFailure:(void(^)(NSError* error)) failure;
 
-- (void) getUserInfoByUserID:(NSString*) userId
+- (void) getUserInfoByUserID:(NSArray*) usersId
                   withFields:(NSArray*) fieldsArray
-                   onSuccess:(void(^)(id user)) success
+                   onSuccess:(void(^)(NSArray* users)) success
                    onFailure:(void(^)(NSError* error)) failure;
 
 - (void) getFollowersByUserID:(NSString*) userId

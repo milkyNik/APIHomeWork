@@ -42,14 +42,14 @@
 
 - (void) getUserInfoFromServer {
     
-    [[ServerManager sharedManager] getUserInfoByUserID:self.userId
+    [[ServerManager sharedManager] getUserInfoByUserID:@[self.userId]
                                             withFields:@[@"city", @"photo_200"]
-                                             onSuccess:^(id user) {
+                                             onSuccess:^(NSArray* users) {
                                                  
-                                                 self.detailUser = user;
-                                                 [self loadInfoUser:user];
+                                                 self.detailUser = [users firstObject];
+                                                 [self loadInfoUser:[users firstObject]];
                                                  
-                                                 NSLog(@"%@", user);
+                                                 NSLog(@"%@", [users firstObject]);
                                                  
                                                  
                                              } onFailure:^(NSError *error) {
@@ -87,7 +87,7 @@
                                                       
                                                       self.usersArray = users;
                                                       
-                                                      UsersViewController* uc = [[UsersViewController alloc] initWithUsersId:users];
+                                                      UsersViewController* uc = [[UsersViewController alloc] initWithUsers:users];
                                                       
                                                       uc.navigationItem.title = @"Subscriptions";
                                                       
@@ -116,7 +116,7 @@
                                                   
                                                   self.usersArray = users;
                                                   
-                                                  UsersViewController* uc = [[UsersViewController alloc] initWithUsersId:users];
+                                                  UsersViewController* uc = [[UsersViewController alloc] initWithUsers:users];
                                                   uc.navigationItem.title = @"Followers";
                                                   
                                                   [self.navigationController pushViewController:uc animated:YES];
